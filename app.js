@@ -6,6 +6,7 @@ import passport from 'passport';
 import cookieSession from 'cookie-session';
 require('./config/passport');
 require('dotenv').config();
+
 // Create Express app
 const app = express();
 

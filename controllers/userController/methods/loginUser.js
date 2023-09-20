@@ -7,6 +7,7 @@ exports.authGoogle = (req,res,next) => {
       } else {
         res.redirect('/');
       }
+    
   }
 exports.authTwitter = (req,res,next) => {
     if(req.isAuthenticated()) {

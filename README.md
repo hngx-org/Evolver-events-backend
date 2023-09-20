@@ -1,4 +1,5 @@
 # Evolver-events-backend
+
 ## Authentication
 The app uses social login for authentication (google and twitter). If the user does not exist, it creates a new user in the database using the google or twitter profile and if the user exists, it finds the user.
 The authentication is session-based and uses cookie sessions for storage.
