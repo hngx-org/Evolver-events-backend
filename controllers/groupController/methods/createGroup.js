@@ -12,13 +12,13 @@ import { errorResponse, successResponse } from "../../../utils/helpers/response.
  */
 
 export const createGroup = tryCatchHelper(async (req, res) => {
-  const { id, title } = req.body;
+  const { title } = req.body;
 
-  if (!id || !title) {
+  if (!title) {
     return errorResponse(res, "Please provide all required fields", StatusCodes.BAD_REQUEST);
   }
 
-  const group = await Group.create({ id, title });
+  const group = await Group.create({ title });
 
   successResponse(res, "Group created successfully", { group }, StatusCodes.CREATED);
 });
