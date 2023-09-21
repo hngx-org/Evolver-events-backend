@@ -18,7 +18,8 @@ function(request, accessToken, refreshToken, profile, done) {
 	User.findOrCreate({ where: {
 		id: profile.id.toString(),
 		name: profile.name.givenName + ' ' + profile.name.familyName,
-		email: profile.emails[0].value
+		email: profile.emails[0].value,
+		avatar: profile.picture
 	   }})
 	   .then((user, created) => {
 		return done(null, user)
@@ -39,7 +40,8 @@ function(req, accessToken, refreshToken, profile, done) {
     User.findOrCreate({ where: {
 		id: profile.id.toString(),
 		name: profile.displayName,
-		email: "null"
+		email: "null",
+		avatar: profile.photos[0].value
 	   }})
 	   .then((user, created) => {
 		return done(null, user)
