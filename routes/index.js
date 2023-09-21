@@ -3,6 +3,7 @@ import welcomeRouter from "./welcomeRoute.js";
 import userRouter from "./userRoutes.js";
 import eventRouter from "./eventRoutes.js";
 import groupRouter from "./groupRoutes.js";
+import imageRouter from "./imageroutes.js";
 
 const router = Router();
 
@@ -17,5 +18,8 @@ router.use(groupRouter);
 
 // describe the event routes
 router.use(eventRouter);
+
+// describe the event routes
+router.use(imageRouter);
 
 export default router;
