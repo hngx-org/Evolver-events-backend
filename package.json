@@ -4,6 +4,9 @@
   "description": "Evolver events app",
   "main": "app.js",
   "type": "module",
+  "engines": {
+    "node": "^18"
+  },
   "directories": {
     "test": "tests"
   },
@@ -25,9 +28,7 @@
   },
   "homepage": "https://github.com/hngx-org/Evolver-events-backend#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
+    "mysql": "^2.18.1",
     "mysql2": "^3.6.1",
     "sequelize": "^6.33.0"
   }

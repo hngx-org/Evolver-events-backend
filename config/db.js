@@ -1,17 +1,21 @@
-import dotenv from "dotenv";
-dotenv.config();
 
-import { Sequelize } from "sequelize";
+// db.js
+import mysql from 'mysql2';
 
-const db = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASS,
-  {
-    dialect: "mysql",
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-  },
-);
+const connection = mysql.createConnection({
+  host: 'ls-748579094099b0766a964caacd8cc4a4b73ec231.czwhjvdkncwk.us-east-2.rds.amazonaws.com',
+  user: 'team',
+  password: 'event_team',
+  database: 'test_db',
+});
 
-export default db;
+connection.connect((err) => {
+  if (err) {
+    console.error('Database connection failed: ' + err.stack);
+    return;
+  }
+  console.log('Connected to the database');
+});
+
+export default connection;
+
