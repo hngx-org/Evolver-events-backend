@@ -4,9 +4,36 @@ const app = express();
 
 import createGroupRouter from "./routes/createGroup.route.js";
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+import express from 'express';
+import cors from 'cors';
+import router from './routes/index.js';
+import db from './config/db.js';
+// Create Express app
+const app = express();
 
+// Enable CORS
+app.use(cors());
+
+// Parse requests of content-type - application/toJSON();
+app.use(express.json());
+
+// Parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+// define api root route
+app.use("/api", router);
 app.use("/api", createGroupRouter);
 
-export default app;
+
+db.authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch((error) => {
+    console.error("Unable to connect to the database: ", error);
+  });
+
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}.`);
+});
