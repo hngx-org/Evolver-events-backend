@@ -15,12 +15,10 @@ async function getImagesForComment(req, res) {
       return res.status(404).json({ message: 'Comment not found' });
     }
 
-    // Find associated image URLs
     const images = await Image.findAll({
       where: { commentId },
     });
 
-    // Extract image URLs and send them in the response
     const imageURLs = images.map((image) => image.url);
     return res.status(200).json(imageURLs);
   } catch (error) {
