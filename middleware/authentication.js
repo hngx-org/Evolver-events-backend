@@ -1,4 +1,4 @@
-import db from "./../models";
+import db from "./../config/db.js";
 const User = db.user;
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
