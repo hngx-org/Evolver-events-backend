@@ -7,6 +7,7 @@ const User = db.define(
     id: {
       type: DataTypes.STRING,
       primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.TEXT,
