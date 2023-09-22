@@ -45,7 +45,7 @@ function(req, accessToken, refreshToken, profile, done) {
 		return done(null, user)
 	   })
 	   .catch((err) => {
-		return done(new Error('Internal Server Error'))
+		return done(err)
 	   })
 }))
 
