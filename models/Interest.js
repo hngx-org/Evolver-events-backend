@@ -1,4 +1,4 @@
-import {  DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 
 import db from "../config/db.js";
 
@@ -23,7 +23,7 @@ const Interest = db.define(
   {
     tableName: "interested_events",
     underscored: true,
-  }
+  },
 );
 User.belongsToMany(Event, { through: Interest });
 Event.belongsToMany(User, { through: Interest });

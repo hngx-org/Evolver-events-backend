@@ -1,10 +1,10 @@
-import userGroups from "../../../models/GroupMembership.js";
+import GroupMembership from "../../../models/GroupMembership.js";
 
 const removeUserFromGroup = async (req, res) => {
   try {
     const { groupId, userId } = req.params;
 
-    const deletedRows = await userGroups.destroy({
+    const deletedRows = await GroupMembership.destroy({
       where: {
         group_id: groupId,
         user_id: userId,

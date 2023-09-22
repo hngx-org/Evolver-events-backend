@@ -5,20 +5,20 @@ import Image from "./Image.js";
 import db from "../config/db.js";
 
 const EventThumbnail = db.define("event_thumbnail", {
-	image_id: {
-		type: DataTypes.UUID,
-		references: {
-			model: Image,
-			key: "id",
-		},
-	},
-	event_id: {
-		type: DataTypes.UUID,
-		references: {
-			model: Event,
-			key: "id",
-		},
-	},
+  image_id: {
+    type: DataTypes.UUID,
+    references: {
+      model: Image,
+      key: "id",
+    },
+  },
+  event_id: {
+    type: DataTypes.UUID,
+    references: {
+      model: Event,
+      key: "id",
+    },
+  },
 });
 
 Event.belongsToMany(Image, { through: EventThumbnail });

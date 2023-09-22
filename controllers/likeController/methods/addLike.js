@@ -1,28 +1,25 @@
-import Like from "../../../models/Likes .js";
-import Comment from "../../../models/Event.js";
-export const likePost = async (req, res) => {
-  const { id } = req.params;
+import Likes from "../../../models/Likes.js";
 
-  /**********Authentication verificaton */
-  // if (!req.userId) {
-  //   return res.json({ message: "Unauthenticated" });
-  // }
-  //for a comment
-  const commentId = await Comment.findOne({ where: { id: id } });
-  const checkIfLikeExist = await Like.findOne({ where: { userId } });
+export const addLike = async (req, res) => {
+  const { commentId, userId } = req.params;
+
   try {
-    if (commentId === null) {
-      console.log("Not found!");
-      res.json({ messgae: "Id not found" });
+    const data = await Likes.create({
+      comment_id: commentId,
+      user_id: userId,
+    });
+
+    if (!data) {
+      res.status(400).json({ message: "Bad request." });
     }
-    if (!checkIfLikeExist) {
-      const like = await Like.create({ commentId, userId });
-      res.status(200).json(like);
-    } else {
-      console.log("UserId: ", req.userId);
-      checkIfLikeExist = Like.filter((id) => id !== String(req.userId));
-    }
+
+    res.status(201).json({
+      success: true,
+      message: "Like added successfully.",
+      data,
+    });
   } catch (error) {
-    res.json({ messgae: err });
+    console.error(error);
+    res.status(500).json({ message: "Internal server error." });
   }
 };

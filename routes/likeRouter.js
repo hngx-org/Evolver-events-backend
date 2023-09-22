@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { likePost } from "../controllers/likeController/index.js";
-import { deletePost } from "../controllers/likeController/methods/addLike.js";
+import { addLike, removeLike } from "../controllers/likeController/index.js";
 
 const likeRouter = Router();
-// ADD AUTHENTICATION
-likeRouter.post("/:id/event", likePost).delete("/:id/event", deletePost);
+
+likeRouter.post("/comments/:commentId/likes/:userId", addLike);
+likeRouter.delete("/comments/:commentId/likes/:userId", removeLike);
 
 export default likeRouter;
