@@ -1,9 +1,12 @@
-const db = require("../models");
+import db from "./config/db.js";
 const User = db.user;
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth2').Strategy;
-const TwitterStrategy = require('passport-twitter').Strategy;
-require('dotenv').config();
+import passport from 'passport';
+import Google from 'passport-google-oauth2';
+import Twitter from 'passport-twitter';
+const GoogleStrategy = Google.Strategy;
+const TwitterStrategy = Twitter.Strategy;
+import dotenv from "dotenv";
+dotenv.config();
 const env = process.env.NODE_ENV;
 
 

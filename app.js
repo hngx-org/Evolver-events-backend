@@ -5,7 +5,7 @@ import db from "./config/db.js";
 import dotenv from "dotenv";
 import passport from 'passport';
 import cookieSession from 'cookie-session';
-require('./middleware/authentication.js');
+import authentication from './middleware/authentication.js';
 
 dotenv.config();
 
