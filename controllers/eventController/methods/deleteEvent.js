@@ -1,34 +1,35 @@
 import Event from "../../../models/Event.js";
-import validate from "uuid-validate";
 
-// defines a function to delete events by ID
-const deleteEvent = async (req, res) => {
-  try {
-    // retrieve id as eventId
-    const eventId = req.params.id;
+export const deleteEvent = async (req, res) => {
+	try {
+		const eventId = req.params.id; // Event ID from params
 
-    // checks if id is provided and an UUID
-    if (!eventId || !validate(eventId, 4)) {
-      throw new Error("missing or Invalid ID");
-    }
+		let event = await Event.findByPk(eventId); // Get event from DB
 
-    const events = await Event.findOne({
-      where: {
-        id: eventId,
-      },
+		if (!event) { // Return error response on missing event
+			res.status(404).json({
+				status: "failed",
+				message: "Event not found",
+			});
+			return
+		}
+		
+		let deleteResult = await event.destroy(); // Attempt a deletion
+	
+		res.status(200).json({ // Return success response on successful deletion
+			success: true,
+			message: "Event deleted successfully",
+			data: deleteResult,
+		});
+
+
+	} catch (error) {
+    res.status(500).json({
+      status: "error",
+      msg: error.message,
     });
-    if (!events) {
-      res.status(404).json("Event can not be found");
-    }
-
-    // deletes event
-    await events.destroy();
-    res.status(200).json({ message: "Event has been deleted successfully" });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Failed to deleted events", message: err.message });
   }
-};
 
-export default deleteEvent;
+
+}
+
