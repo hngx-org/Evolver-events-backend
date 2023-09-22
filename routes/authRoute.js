@@ -1,18 +1,18 @@
-require('../config/passport');
-const passport = require('passport');
-const users = require("../controllers/userController/methods/loginUser");
-const router = require("express").Router();
+require('../middleware/authentication');
+import express from 'express'
+import { loginGoogle } from '../controllers/userController/index.js'
+import { logoutUser } from '../controllers/userController/index.js'
+import { loginTwitter } from '../controllers/userController/index.js'
+import passport from 'passport';
 
-module.exports = function(app) {
-// router.get("/", users.index); uncomment to test
-    router.get("/auth/google", passport.authenticate('google', { scope:
-        [ 'email', 'profile' ]
-    }), users.authGoogle);
-    router.get("/auth/twitter", passport.authenticate('twitter'));
-    router.get("/auth/callback/google",passport.authenticate('google', { failureRedirect: '/', failureMessage: true }), users.authGoogle);
-    router.get("/auth/callback/twitter", passport.authenticate('twitter', { failureRedirect: '/', failureMessage: true }), users.authTwitter);
-    router.get("/logout", users.logout);
+const authRouter = express.Router()
 
-    app.use('/',router)
-    
-}
+authRouter.get('/auth/google', passport.authenticate('google', { scope:
+    [ 'email', 'profile' ]
+}))
+authRouter.get("/auth/twitter", passport.authenticate('twitter'));
+authRouter.get('/auth/callback/google',passport.authenticate('google', { failureRedirect: '/', failureMessage: true }),loginGoogle)
+authRouter.get("/auth/callback/twitter", loginTwitter);
+authRouter.get('/logout', logoutUser)
+
+export default authRouter;
