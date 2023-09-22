@@ -7,7 +7,6 @@ export const AddCommentToEvent = async (req, res, next) => {
 
     const EventId = req.params.eventId
 
-
     try {
         // only user can update events
         const event = await Event.findByPk(EventId)
