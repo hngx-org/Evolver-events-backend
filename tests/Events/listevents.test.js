@@ -1,7 +1,7 @@
-import { listAllEvents } from '../controllers/eventController/methods/listEvents';
-import Event from '../models/Event';
+import { listAllEvents } from '../../controllers/eventController/methods/listEvents';
+import Event from '../../models/Event';
 
-jest.mock('../models/Event', () => ({
+jest.mock('../../models/Event', () => ({
   findAll: jest.fn(),
 }));
 

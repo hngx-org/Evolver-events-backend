@@ -1,7 +1,7 @@
-import addUserToGroup from '../controllers/groupController/methods/addUserToGroup';
-import GroupMembership from '../models/GroupMembership';
+import addUserToGroup from '../../controllers/groupController/methods/addUserToGroup';
+import GroupMembership from '../../models/GroupMembership';
 
-jest.mock('../models/GroupMembership', () => ({
+jest.mock('../../models/GroupMembership', () => ({
   create: jest.fn(),
 }));
 

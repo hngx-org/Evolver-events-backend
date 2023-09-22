@@ -1,8 +1,8 @@
-import { getEventDetails } from '../controllers/eventController/methods/getEventDetails';
-import Event from '../models/Event';
+import { getEventDetails } from '../../controllers/eventController/methods/getEventDetails';
+import Event from '../../models/Event';
 
 // Mock the Event module and its methods
-jest.mock('../models/Event', () => ({
+jest.mock('../../models/Event', () => ({
   findByPk: jest.fn(), // Mock the findByPk method
 }));
 

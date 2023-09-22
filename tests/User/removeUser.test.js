@@ -1,7 +1,7 @@
-import removeUserFromGroup from '../controllers/groupController/methods/removeUserFromGroup';
-import userGroups from '../models/GroupMembership';
+import removeUserFromGroup from '../../controllers/groupController/methods/removeUserFromGroup';
+import userGroups from '../../models/GroupMembership';
 
-jest.mock('../models/GroupMembership', () => ({
+jest.mock('../../models/GroupMembership', () => ({
   destroy: jest.fn(),
 }));
 
