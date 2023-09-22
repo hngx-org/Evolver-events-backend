@@ -1,8 +1,10 @@
 import express from 'express'
-import { updateUser } from '../controllers/userController/index.js'
+import { updateUser, registerUser } from '../controllers/userController/index.js'
 
 const userRouter = express.Router()
 
-userRouter.put('/user/:id', updateUser)
+userRouter.post('/auth', registerUser);
+
+userRouter.put('/user/:id', updateUser);
 
 export default userRouter;
