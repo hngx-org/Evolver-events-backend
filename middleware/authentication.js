@@ -1,14 +1,11 @@
 import db from "./../config/db.js";
 const User = db.user;
 import passport from 'passport';
-import Google from 'passport-google-oauth2';
-import Twitter from 'passport-twitter';
-const GoogleStrategy = Google.Strategy;
-const TwitterStrategy = Twitter.Strategy;
+import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 import dotenv from "dotenv";
 dotenv.config();
 const env = process.env.NODE_ENV;
-
 
 passport.use(new GoogleStrategy({
 	clientID: process.env.CLIENTID, // Your Credentials here.
