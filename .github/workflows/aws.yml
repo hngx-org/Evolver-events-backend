@@ -1,15 +1,15 @@
-name: Deploy to Dev
+name: Deploy to Production
 
 on:
   push:
     branches:
-      - dev
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       
-      - name: Deploy to dev
+      - name: Deploy to Production
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_HOST }}

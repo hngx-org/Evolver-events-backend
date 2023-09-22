@@ -17,9 +17,9 @@ router.use(authRouter);
 
 //describe the event routes
 router.use(ImageRouter);
-router.use(groupRouter)
+router.use(groupRouter);
 
-router.use(commentRouter)
+router.use(commentRouter);
 
 router.use(eventRouter);
 

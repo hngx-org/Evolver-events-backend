@@ -1,13 +1,44 @@
-import express from 'express'
-import { updateUser, registerUser } from '../controllers/userController/index.js'
-import {removeInterest} from '../controllers/interestController/index.js'
+import express from "express";
+import { updateUser } from "../controllers/userController/index.js";
 
-const userRouter = express.Router()
+const userRouter = express.Router();
 
-userRouter.put('/user/:id', updateUser)
-userRouter.delete('/users/:userId/interests/:eventId', removeInterest)
-userRouter.post('/auth', registerUser);
+/**
+ * @swagger
+ * /api/user/{id}:
+ *   put:
+ *     summary: Update a user's profile
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the user to update.
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       description: User data to update.
+ *       required: true
+ *       content:
+ *         application/json:
 
+ *     responses:
+ *       '200':
+ *         description: User updated successfully.
+ *         content:
+ *           application/json:
 
+ *       '404':
+ *         description: User not found.
+ *         content:
+ *           application/json:
+
+ *       '500':
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+
+ */
+
+userRouter.put("/user/:id", updateUser);
 
 export default userRouter;
