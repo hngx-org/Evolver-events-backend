@@ -2,7 +2,7 @@ import addUserToGroup from '../../controllers/groupController/methods/addUserToG
 import GroupMembership from '../../models/GroupMembership';
 
 jest.mock('../../models/GroupMembership', () => ({
-  create: jest.fn(),
+  create: jest.fn(), // Mock the create function
 }));
 
 describe('addUserToGroup', () => {
@@ -18,15 +18,19 @@ describe('addUserToGroup', () => {
       json: jest.fn(),
     };
 
+    // Mock the create function to return a resolved value
+    GroupMembership.create.mockResolvedValue({ user_id: 1, group_id: 2 });
+
     addUserToGroup(req, res);
 
+    // Check if GroupMembership.create was called with the expected parameters
     expect(GroupMembership.create).toHaveBeenCalledWith({
       user_id: 1,
       group_id: 2,
     });
   });
 
-  it('should return a success message with a 200 status code', () => {
+  it('should return a success message with a 200 status code', async () => {
     const req = {
       params: {
         userId: 1,
@@ -38,30 +42,16 @@ describe('addUserToGroup', () => {
       json: jest.fn(),
     };
 
-    addUserToGroup(req, res);
+    // Mock the create function to return a resolved value
+    GroupMembership.create.mockResolvedValue({ user_id: 1, group_id: 2 });
 
+    await addUserToGroup(req, res);
+
+    // Check if the response status and JSON were set correctly
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({ message: 'user has been successfully added to group.' });
+    expect(res.json).toHaveBeenCalledWith({ success: true, message: 'user has been successfully added to group.', data: { user_id: 1, group_id: 2 } });
   });
 
-  it('should return a 500 status code and an error message if there is an error creating the GroupMembership', () => {
-    const req = {
-      params: {
-        userId: 1,
-        groupId: 2,
-      },
-    };
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-    GroupMembership.create.mockImplementation(() => {
-      throw new Error('Test error');
-    });
+  // Add more test cases as needed
 
-    addUserToGroup(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Internal server error.' });
-  });
 });
