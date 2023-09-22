@@ -5,18 +5,21 @@ const User = db.define(
   "user",
   {
     id: {
-      type: Sequelize.STRING,
-      primaryKey: true
+      type: DataTypes.STRING,
+      primaryKey: true,
     },
     name: {
-      type: Sequelize.STRING
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
     email: {
-      type: Sequelize.STRING
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
     avatar: {
-      type: Sequelize.STRING
-    }
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   },
   {
     timestamps: false,
