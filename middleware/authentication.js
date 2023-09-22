@@ -1,4 +1,4 @@
-import db from "./config/db.js";
+import db from "./../config/db.js";
 const User = db.user;
 import passport from 'passport';
 import Google from 'passport-google-oauth2';
@@ -8,7 +8,6 @@ const TwitterStrategy = Twitter.Strategy;
 import dotenv from "dotenv";
 dotenv.config();
 const env = process.env.NODE_ENV;
-
 
 
 passport.use(new GoogleStrategy({

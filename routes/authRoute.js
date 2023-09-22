@@ -1,5 +1,5 @@
 import express from 'express'
-import authentication from '../middleware/authentication.js'
+import '../middleware/authentication.js'
 import { authGoogle } from '../controllers/userController/index.js'
 import { logout } from '../controllers/userController/index.js'
 import { authTwitter } from '../controllers/userController/index.js'
