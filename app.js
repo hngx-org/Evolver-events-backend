@@ -1,5 +1,4 @@
-import express from "express";
-express = require('express');
+const express = require('express');
 import cors from "cors";
 import router from "./routes/index.js";
 import db from "./config/db.js";
