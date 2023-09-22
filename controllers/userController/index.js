@@ -1,9 +1,9 @@
 import { updateUser } from "./methods/updateUserProfile.js";
-import { loginGoogle } from "./methods/loginGoogle.js";
-import { loginTwitter } from "./methods/loginTwitter.js";
-import { logoutUser } from "./methods/logoutUser.js";
+import { authGoogle } from "./methods/loginGoogle.js";
+import { authTwitter } from "./methods/loginTwitter.js";
+import { logout } from "./methods/logoutUser.js";
 
-export { loginGoogle }
+export { authGoogle }
 export { updateUser }
-export { loginTwitter }
-export { logoutUser }
+export { authTwitter }
+export { logout }
