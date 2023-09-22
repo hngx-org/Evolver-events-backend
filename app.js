@@ -1,10 +1,10 @@
 const express = require('express');
-import cors from "cors";
-import router from "./routes/index.js";
-import db from "./config/db.js";
-import dotenv from "dotenv";
-import passport from 'passport';
-import cookieSession from 'cookie-session';
+const cors = require('cors')
+const passport = require('passport');
+const cookieSession = require('cookie-session')
+const dotenv = require('dotenv');
+require("./routes/index.js");
+require("./config/db.js");
 require('./config/passport');
 
 dotenv.config();
