@@ -10,7 +10,10 @@ const authRouter = express.Router()
 authRouter.get('/auth/google', passport.authenticate('google', { scope:
     [ 'email', 'profile' ]
 }))
-authRouter.get("/auth/twitter", passport.authenticate('twitter'));
+authRouter.get("/auth/twitter", passport.authenticate('twitter'), {crossDomain: true,
+xhrFields: {
+        withCredentials: true
+    }});
 authRouter.get('/auth/callback/google',passport.authenticate('google', { failureRedirect: '/', failureMessage: true }),authGoogle)
 authRouter.get("/auth/callback/twitter", passport.authenticate('twitter', { failureRedirect: '/', failureMessage: true }), authTwitter);
 authRouter.get('/logout', logout)
