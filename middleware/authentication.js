@@ -1,5 +1,4 @@
-import db from "./../config/db.js";
-const User = db.user;
+import User from "./../models/User.js";
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth2';
 import { Strategy as TwitterStrategy } from 'passport-twitter';
