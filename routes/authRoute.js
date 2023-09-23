@@ -14,10 +14,7 @@ authRouter.get(
 authRouter.get("/auth/twitter", passport.authenticate("twitter"));
 authRouter.get(
   "/auth/callback/google",
-  passport.authenticate("google", {
-    failureRedirect: "/",
-    failureMessage: true,
-  }),
+  passport.authenticate("google"),
   loginGoogle,
 );
 authRouter.get("/auth/callback/twitter", loginTwitter);

@@ -24,6 +24,7 @@ passport.use(
           return done(null, user);
         })
         .catch((err) => {
+          console.log(err);
           return done(new Error("Internal Server Error"));
         });
     },
