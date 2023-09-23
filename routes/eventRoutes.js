@@ -7,7 +7,7 @@ import {
 } from "../controllers/eventController/index.js";
 import validate from "../middleware/validation.js";
 
-import { AddCommentToEvent } from "../controllers/commentController/index.js";
+
 import { userAuthorisation } from "../middleware/authorization.js";
 
 const eventRouter = express.Router();
@@ -20,6 +20,11 @@ eventRouter.get("/events", userAuthorisation, listAllEvents);
 eventRouter.get("/events/:id", userAuthorisation, getEventDetails);
 eventRouter.delete("/events/:id", userAuthorisation, deleteEvent);
 
-eventRouter.post("/events/:eventId", userAuthorisation, AddCommentToEvent);
+
+/*
+AddcommentToEvent Routes has moved  to the commentRoutes
+ endpoint also changed to( "/events/:eventId/comment/:userId",userAuthorisation, AddCommentToEvent)
+ */
+
 
 export default eventRouter;
