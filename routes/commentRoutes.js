@@ -1,8 +1,3 @@
-import express from "express";
-import { listComments } from "../controllers/commentController/index.js";
-
-const commentRouter = express.Router();
-
 /**
  * @swagger
  * /events/{eventId}/comment:
@@ -20,7 +15,12 @@ const commentRouter = express.Router();
  *       '500':
  *         description: Internal server error.
  */
+import express from "express";
+import { listComments } from "../controllers/commentController/index.js";
 
-commentRouter.get("/events/:eventId/comment", listComments);
+import { userAuthorisation } from "../middleware/authorization.js";
+const commentRouter = express.Router();
+
+commentRouter.get("/events/:eventId/comments", userAuthorisation, listComments);
 
 export default commentRouter;

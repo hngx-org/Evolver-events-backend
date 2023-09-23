@@ -4,7 +4,7 @@ import {
   getImagesForComment,
 } from "../controllers/imageController/index.js";
 
-const ImageRoutes = express.Router();
+import { userAuthorisation } from "../middleware/authorization.js";
 
 /**
  * @swagger
@@ -47,7 +47,18 @@ const ImageRoutes = express.Router();
  *         description: Internal server error.
  */
 
-ImageRoutes.post("/comments/:commentId/images", addImageToComment);
-ImageRoutes.get("/comments/:commentId/images", getImagesForComment);
+const ImageRoutes = express.Router();
+
+ImageRoutes.get(
+  "/comments/:commentId/images",
+  userAuthorisation,
+  getImagesForComment,
+);
+
+ImageRoutes.post(
+  "/comments/:commentId/images",
+  userAuthorisation,
+  addImageToComment,
+);
 
 export default ImageRoutes;

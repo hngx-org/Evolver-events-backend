@@ -1,119 +1,107 @@
-# Evolver Events Backend
+# Authorisation
 
-## Authorization
+The backend api has user authorisation implemented.
+this implementation protects sensitive api operations from being carried out by any user
+examples:
 
-The backend API implements user authorization to protect sensitive API operations from unauthorized access. Below are examples of how authorization is enforced:
-
-### Ensure User Is Logged In
-
-- **Endpoint**: `GET /api`
-- **Unauthorized Response**:
-```json
-{
-  "success": false,
-  "error": {
+1.  Authorisation ensures a user is loggin before accessing the api
+    ~ GET /api (when not logged in)
+    Response:
+    {
+    "success": false,
+    "error": {
     "type": "Unauthorized",
     "code": 401,
     "message": "You are not logged in"
-  }
-}
+    }
+    }
 
-
-Event Operations
-
-Endpoint: PUT /api/events/:eventId or DELETE /api/events/:eventId
--   **Unauthorized Response**:
-```json
-{
-  "success": false,
-  "error": {
+2.  Authorisation ensures only the event creator can edit or delete an event
+    ~ PUT /api/events/:eventId or DELETE /api/events/:eventId (when not creator)
+    Response:
+    {
+    "success": false,
+    "error": {
     "type": "Unauthorized",
     "code": 401,
     "message": "You are not the creator of this event"
-  }
-}
+    }
+    }
 
-Not Found Response:
-```json
-{
-  "success": false,
-  "error": {
+    if event not found
+    {
+    "success": false,
+    "error": {
     "type": "Not Found",
     "code": 404,
-    "message": "Event doesn't exist"
-  }
-}
+    "message": "Event doesnt exist"
+    }
+    }
 
-Group Operations
-Endpoint: PUT /api/groups/:groupId or DELETE /api/groups/:groupId
-Unauthorized Response:
-```json
-{
-  "success": false,
-  "error": {
+3.  Authorisation ensures only the group creator can edit or delete a group
+    ~ PUT /api/groups/:groupId or DELETE /api/groups/:groupId (when not creator)
+    Response:
+    {
+    "success": false,
+    "error": {
     "type": "Unauthorized",
     "code": 401,
     "message": "You are not the creator of this group"
-  }
-}
+    }
+    }
 
-Not Found Response:
-```json
-{
-  "success": false,
-  "error": {
+    if group not found
+    {
+    "success": false,
+    "error": {
     "type": "Not Found",
     "code": 404,
-    "message": "Group doesn't exist"
-  }
-}
+    "message": "Group doesnt exist"
+    }
+    }
 
-Group Member Operations
-Endpoint: DELETE /api/groups/:groupId/members/:userId
-Unauthorized Response:
-```json
-{
-  "success": false,
-  "error": {
+4.  Authorisation ensures that only the user or the group creator can remove a user from the group
+    ~ DELETE /api/groups/:groupId/members/:userId (if user is not userId or group creator)
+    Response:
+    {
+    "success": false,
+    "error": {
     "type": "Unauthorized",
     "code": 401,
-    "message": "You are not authorized to delete a user"
-  }
-}
+    "message": "You are not authorised to delete a user"
+    }
+    }
 
-Not Found Response:
-```json
-{
-  "success": false,
-  "error": {
+    if group not found
+    {
+    "success": false,
+    "error": {
     "type": "Not Found",
     "code": 404,
-    "message": "Group doesn't exist"
-  }
-}
+    "message": "Group doesnt exist"
+    }
+    }
 
-User Interests
-Endpoints: DELETE /api/users/:userId/interests/:eventId or POST /api/users/:userId/interests/:eventId
-Unauthorized Response:
-```json
-{
-  "success": false,
-  "error": {
+5.  Authorisation ensures that uses cannot delete the interests of others
+    ~ DELETE /api/users/:userId/interests/:eventId or POST /api/users/:userId/interests/:eventId (if another user)
+    Response:
+    {
+    "success": false,
+    "error": {
     "type": "Unauthorized",
     "code": 401,
-    "message": "You are not authorized to delete or add interests for others"
-  }
-}
+    "message": "You are not authorised to delete or add interests for others"
+    }
+    }
 
-User Likes
-Endpoints: POST /api/comments/:commentId/likes/:userId or DELETE /api/comments/:commentId/likes/:userId
-Unauthorized Response:
-```json
-{
-  "success": false,
-  "error": {
+6.  Authorisation ensures that uses cannot unlike for others
+    ~ POST /api/comments/:commentId/likes/:userId or DELETE /api/comments/:commentId/likes/:userId (if another user)
+    Response:
+    {
+    "success": false,
+    "error": {
     "type": "Unauthorized",
     "code": 401,
-    "message": "You are not authorized to add/remove another user's likes"
-  }
-}
+    "message": "You are not authorised to add/remove another user's likes"
+    }
+    }

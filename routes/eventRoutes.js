@@ -7,6 +7,10 @@ import {
   updateEvent,
 } from "../controllers/eventController/index.js";
 import validate from "../middleware/validation.js";
+import {
+  eventCRUDAuthorise,
+  userAuthorisation,
+} from "../middleware/authorization.js";
 
 const eventRouter = express.Router();
 
@@ -78,10 +82,21 @@ const eventRouter = express.Router();
 /* userAuthorisation middleware needs to 
 be imported and passed before the validate.Event
 in the createEvent route. It requires the req.session.userId. Ypu can refer to the createEvent method in the event controller */
-eventRouter.post("/events", validate.Event, createEvent);
-eventRouter.get("/events", listAllEvents);
-eventRouter.get("/events/:id", getEventDetails);
-eventRouter.put("/events/:id", updateEvent);
-eventRouter.delete("/events/:id", deleteEvent);
+
+eventRouter.post("/events", userAuthorisation, validate.Event, createEvent);
+eventRouter.get("/events", userAuthorisation, listAllEvents);
+eventRouter.get("/events/:id", userAuthorisation, getEventDetails);
+eventRouter.put(
+  "/events/:id",
+  userAuthorisation,
+  eventCRUDAuthorise,
+  updateEvent,
+);
+eventRouter.delete(
+  "/events/:id",
+  userAuthorisation,
+  eventCRUDAuthorise,
+  deleteEvent,
+);
 
 export default eventRouter;

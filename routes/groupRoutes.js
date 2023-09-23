@@ -3,8 +3,16 @@ import {
   addUserToGroup,
   removeUserFromGroup,
   createGroup,
+} from "../controllers/groupController/index.js";
+import {
+  groupCrudAuthorisation,
+  groupMembershipCrudAuthorisation,
+  userAuthorisation,
+} from "../middleware/authorization.js";
+import {
   getGroupDetails,
   deleteGroup,
+  updateGroup,
 } from "../controllers/groupController/index.js";
 
 const groupRouter = express.Router();
@@ -116,11 +124,27 @@ const groupRouter = express.Router();
  *         description: Internal server error.
  */
 
-groupRouter.post("/groups", createGroup);
-groupRouter.put("/groups/:groupId");
-groupRouter.delete("/groups/:groupId", deleteGroup);
-groupRouter.post("/groups/:groupId/members/:userId", addUserToGroup);
-groupRouter.delete("/groups/:groupId/members/:userId", removeUserFromGroup);
-groupRouter.get("/groups/:groupId", getGroupDetails);
+groupRouter.get("/groups/:groupId", userAuthorisation, getGroupDetails);
+groupRouter.post("/groups", userAuthorisation, createGroup);
+groupRouter.put("/groups/:groupId", userAuthorisation, groupCrudAuthorisation); // route controller to follow
+groupRouter.delete(
+  "/groups/:groupId",
+  userAuthorisation,
+  groupCrudAuthorisation,
+  deleteGroup,
+);
+
+groupRouter.post(
+  "/groups/:groupId/members/:userId",
+  userAuthorisation,
+  groupMembershipCrudAuthorisation,
+  addUserToGroup,
+);
+groupRouter.delete(
+  "/groups/:groupId/members/:userId",
+  userAuthorisation,
+  groupMembershipCrudAuthorisation,
+  removeUserFromGroup,
+);
 
 export default groupRouter;

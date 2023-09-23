@@ -1,4 +1,5 @@
 import Event from "../../../models/Event.js";
+
 import validate from "uuid-validate";
 
 // defines a function to delete events by ID
