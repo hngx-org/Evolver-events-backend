@@ -1,5 +1,3 @@
-# Evolver-events-backend
-
 # Authorisation
 
 The backend api has user authorisation implemented.
