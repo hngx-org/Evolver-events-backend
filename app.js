@@ -34,11 +34,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// define authentication route
-app.use("/auth", authRouter)
-
 // define api root route
-app.use("/api", userAuthorisation, router);
+app.use("/api", router);
 
 db.authenticate()
   .then(() => {

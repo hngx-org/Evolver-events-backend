@@ -8,19 +8,19 @@ import passport from "passport";
 const authRouter = express.Router();
 
 authRouter.get(
-  "/google",
+  "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] }),
 );
 authRouter.get("/auth/twitter", passport.authenticate("twitter"));
 authRouter.get(
-  "/callback/google",
+  "/auth/callback/google",
   passport.authenticate("google", {
     failureRedirect: "/",
     failureMessage: true,
   }),
   loginGoogle,
 );
-authRouter.get("/callback/twitter", loginTwitter);
+authRouter.get("/auth/callback/twitter", loginTwitter);
 authRouter.get("/logout", logoutUser);
 
 export default authRouter;
