@@ -7,6 +7,8 @@ import {
 } from "../middleware/authorization.js";
 
 import { removeInterest } from "../controllers/interestController/index.js";
+import validate from "../middleware/validation.js";
+import registerUser from "../controllers/userController/methods/registerUser.js";
 
 const userRouter = express.Router();
 
@@ -16,6 +18,9 @@ userRouter.put(
   userCRUDAuthorisation,
   updateUser,
 );
+
+//Register user
+userRouter.post("/users/register", validate.User, registerUser);
 
 //awaiting user post interest controller
 userRouter
