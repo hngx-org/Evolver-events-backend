@@ -36,6 +36,8 @@
     "joi": "^17.10.2",
     "mysql2": "^3.6.1",
     "passport": "^0.6.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-twitter": "^1.0.4",
     "sequelize": "^6.33.0",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"

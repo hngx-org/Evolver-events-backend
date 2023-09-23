@@ -1,3 +1,3 @@
-import { removeInterest } from "./methods/removeInterest";
+import { removeInterest } from "./methods/removeInterest.js";
 
-export {removeInterest}
+export { removeInterest };
