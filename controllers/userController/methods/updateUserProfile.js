@@ -2,10 +2,9 @@ import User from "../../../models/User.js";
 
 export const updateUser = async (req, res) => {
   try {
-    const {user_Id} = req.params.id;
-
+    const userId = req.params.id;
     const { name, email, avatar } = req.body;
-    const user = await User.findByPk({user_Id});
+    const user = await User.findByPk(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
