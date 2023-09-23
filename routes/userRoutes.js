@@ -9,7 +9,6 @@ import {
 import { removeInterest } from "../controllers/interestController/index.js";
 import validate from "../middleware/validation.js";
 import registerUser from "../controllers/userController/methods/registerUser.js";
-import { getUserProfile } from "../controllers/userController/methods/getUserProfile.js";
 
 const userRouter = express.Router();
 
@@ -22,9 +21,6 @@ userRouter.put(
 
 //Register user
 userRouter.post("/users/register", validate.User, registerUser);
-
-// get User profile
-userRouter.get("/users/:user_id/profile", getUserProfile)
 
 //awaiting user post interest controller
 userRouter
