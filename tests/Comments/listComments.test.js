@@ -1,6 +1,6 @@
 import listComments from "../../controllers/commentController/methods/listComments";
 import Comment from "../../models/Comment.js";
-import CommentImage from "..//../models/CommentImages.js";
+import CommentImage from "../../models/CommentImages.js";
 import Image from "../../models/Image.js";
 import User from "../../models/User.js";
 

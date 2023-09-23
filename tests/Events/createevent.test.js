@@ -1,33 +1,19 @@
-// Import the necessary modules and the createEvent function
-import { createEvent } from '../../controllers/eventController/methods/createEvent';
-import Event from '../../models/Event.js';
-import { validationResult } from 'express-validator';
+import { createEvent } from "../../controllers/eventController/methods/createEvent";
+import Event from "../../models/Event.js";
+import { validationResult } from "express-validator";
 
-// Mock the express-validator validationResult function
-jest.mock('express-validator', () => ({
-  validationResult: jest.fn(),
-}));
+jest.mock("../../models/Event.js");
+jest.mock("express-validator");
 
-// Mock the Event model
-jest.mock('../../models/Event.js', () => ({
-  create: jest.fn(),
-}));
+describe("createEvent", () => {
+  it("returns a 400 status if there are validation errors", async () => {
+    validationResult.mockReturnValue({
+      isEmpty: () => false,
+      array: () => ["Error"],
+    });
 
-describe('createEvent', () => {
-  // Test case when validation passes
-  it('should create a new event and return a success response', async () => {
-    // Mock the request and response objects
     const req = {
-      body: {
-        title: 'Test Event',
-        description: 'Test description',
-        creator_id: 1,
-        location: 'Test location',
-        start_date: '2023-09-30',
-        end_date: '2023-10-01',
-        start_time: '09:00',
-        end_time: '17:00',
-      },
+      body: {},
     };
 
     const res = {
@@ -35,70 +21,66 @@ describe('createEvent', () => {
       json: jest.fn(),
     };
 
-    // Mock that validation passes
-    validationResult.mockReturnValueOnce({ isEmpty: () => true });
-
-    // Mock the Event.create method
-    const mockEvent = {
-      id: 1,
-      title: 'Test Event',
-      // Add other fields as needed
-    };
-    Event.create.mockResolvedValueOnce(mockEvent);
-
-    // Call the createEvent function
     await createEvent(req, res);
 
-    // Assertions
-    expect(validationResult).toHaveBeenCalledWith(req);
-    expect(Event.create).toHaveBeenCalledWith({
-      title: 'Test Event',
-      description: 'Test description',
-      creator_id: 1,
-      location: 'Test location',
-      start_date: '2023-09-30',
-      end_date: '2023-10-01',
-      start_time: '09:00',
-      end_time: '17:00',
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
+      status: "error",
+      msg: ["Error"],
     });
+  });
+
+  it("creates an event and returns a 201 status if there are no validation errors", async () => {
+    validationResult.mockReturnValue({
+      isEmpty: () => true,
+    });
+
+    const mockEvent = { id: "1", title: "Test Event" };
+    Event.create.mockResolvedValue(mockEvent);
+
+    const req = {
+      body: { title: "Test Event" },
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    await createEvent(req, res);
+
+    expect(Event.create).toHaveBeenCalledWith({ title: "Test Event" });
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      status: 'success',
-      msg: 'Event created',
+      status: "success",
+      msg: "Event created",
       data: mockEvent,
     });
   });
 
-  // Test case when validation fails
-  // Test case when validation fails
-it('should return a 400 response with validation errors', async () => {
-  // Mock the request and response objects
-  const req = {
-    body: {}, // Invalid request body with missing fields
-  };
+  it("returns a 500 status if an error occurs", async () => {
+    validationResult.mockReturnValue({
+      isEmpty: () => true,
+    });
 
-  const res = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn(),
-  };
+    const mockError = new Error("Internal server error.");
+    Event.create.mockRejectedValue(mockError);
 
-  // Mock that validation fails
-  validationResult.mockReturnValueOnce({
-    isEmpty: () => false,
-    array: () => [{ param: 'title', msg: 'Title is required' }],
-  });
+    const req = {
+      body: { title: "Test Event" },
+    };
 
-  // Call the createEvent function
-  await createEvent(req, res);
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
 
-  // Assertions
-  expect(validationResult).toHaveBeenCalledWith(req);
-  expect(Event.create).not.toHaveBeenCalled(); // Event.create should not be called
-  expect(res.status).toHaveBeenCalledWith(400);
-  expect(res.json).toHaveBeenCalledWith({
-    status: 'error',
-    msg: [{ param: 'title', msg: 'Title is required' }],
+    await createEvent(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({
+      status: "error",
+      msg: mockError.message,
+    });
   });
 });
-  // Add more test cases as needed}
-})

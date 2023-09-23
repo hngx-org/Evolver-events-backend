@@ -1,4 +1,4 @@
-import { AddCommentToEvent } from "../../controllers/commentController/methods/addComment";
+import AddCommentToEvent from "../../controllers/commentController/methods/addComment";
 import Comment from "../../models/Comment.js";
 import Event from "../../models/Event.js";
 
