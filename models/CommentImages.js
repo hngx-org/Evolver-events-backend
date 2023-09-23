@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../config/db.js";
+import Comment from "./Comment.js";
+import Image from "./Image.js";
 
 const CommentImages = db.define(
   "comment_images",
@@ -9,7 +11,7 @@ const CommentImages = db.define(
       allowNull: false,
       primaryKey: true,
       references: {
-        model: "comment",
+        model: Comment,
         key: "id",
       },
     },
@@ -18,12 +20,18 @@ const CommentImages = db.define(
       allowNull: false,
       primaryKey: true,
       references: {
-        model: "image",
+        model: Image,
         key: "id",
       },
     },
   },
   { timestamps: false, underscored: true },
 );
+
+CommentImages.belongsTo(Comment, {foreignKey: "comment_id"})
+CommentImages.belongsTo(Image, {foreignKey: "image_id"})
+
+Comment.hasMany(CommentImages, {foreignKey: "comment_id"})
+Image.hasMany(CommentImages, {foreignKey: "image_id"})
 
 export default CommentImages;
