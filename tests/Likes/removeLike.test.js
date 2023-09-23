@@ -1,9 +1,9 @@
 import removeLike from '../../controllers/likeController/methods/removeLike';
 import Likes from '../../models/Likes';
 
-jest.mock('../../models/Likes', ()=>{
+jest.mock('../../models/Likes', ()=>{{
    destroy: jest.fn()
-})
+}})
 
 describe('remove like', () => {
   it('should remove like from a comment', async () => {
