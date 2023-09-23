@@ -47,6 +47,26 @@ const validate = {
       .notEmpty()
       .trim(),
   ],
+  User: [
+    check("name", "name field is required.")
+      .exists()
+      .bail()
+      .isString()
+      .notEmpty()
+      .trim(),
+    check("email", "email field is required.")
+      .exists()
+      .bail()
+      .isEmail()
+      .notEmpty()
+      .trim(),
+    check("avatar", "avatar field is required.")
+      .exists()
+      .bail()
+      .isString()
+      .notEmpty()
+      .trim(),
+  ],
 };
 
 export default validate;
