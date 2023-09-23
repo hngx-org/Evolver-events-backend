@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import User from "./User.js";
+import Comment from "./Comment.js";
+
 
 import db from "../config/db.js";
 
@@ -45,5 +47,7 @@ const Event = db.define(
 
 Event.belongsTo(User, { foreignKey: "creator_id" });
 User.hasMany(Event, { foreignKey: "creator_id" });
+
+
 
 export default Event;
