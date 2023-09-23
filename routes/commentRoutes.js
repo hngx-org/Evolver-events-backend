@@ -1,9 +1,9 @@
-import express from 'express'
-import { listComments } from '../controllers/commentController/index.js';
+import express from "express";
+import { listComments } from "../controllers/commentController/index.js";
+import { userAuthorisation } from "../middleware/authorization.js";
 
-const commentRouter = express.Router()
+const commentRouter = express.Router();
 
-commentRouter.get('/events/:eventId/comment', listComments);
-
+commentRouter.get("/events/:eventId/comments", userAuthorisation, listComments);
 
 export default commentRouter;

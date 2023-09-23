@@ -1,7 +1,8 @@
+import {
+  errorResponse,
+  successResponse,
+} from "../../../utils/helpers/response.helpers.js";
 export const authGoogle =  (req, res,next) => {
-  if(req.isAuthenticated()) {
-    res.send('Hello ' + req.user[0].name); // Should redirect to homepage in app
-  } else {
-    res.redirect('/');
-  }
+  return successResponse(res, "authenticated", { user: req.user }, 200);
+  return errorResponse(res, "failed authentication", 401);
 };

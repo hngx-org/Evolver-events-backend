@@ -1,6 +1,8 @@
 import { DataTypes } from "sequelize";
 
 import db from "../config/db.js";
+import User from "./User.js";
+import Event from "./Event.js";
 
 const Interest = db.define(
   "interest",
