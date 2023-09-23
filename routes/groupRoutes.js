@@ -27,7 +27,7 @@ const groupRouter = express.Router();
 // >>>>>>> dev
 groupRouter.get("/groups/:groupId", userAuthorisation, getGroupDetails);
 groupRouter.post("/groups", userAuthorisation, createGroup);
-groupRouter.put("/groups/:groupId",userAuthorisation, groupCrudAuthorisation); // route controller to follow
+groupRouter.put("/groups/:groupId",userAuthorisation, groupCrudAuthorisation, updateGroup); // route controller to follow
 groupRouter.delete(
   "/groups/:groupId",
   userAuthorisation,
