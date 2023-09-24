@@ -14,17 +14,18 @@ import {
   deleteGroup,
   updateGroup,
 } from "../controllers/groupController/index.js";
+import getAllGroups from "../controllers/groupController/methods/getAllGroups.js";
 
 const groupRouter = express.Router();
 
-// <<<<<<< authorization
-// =======
+// get all groups
+groupRouter.get("/groups", getAllGroups);
+
 // groupRouter.post("/groups", createGroup);
 // groupRouter.put("/groups/:groupId", updateGroup);
 // groupRouter.delete("/groups/:groupId", deleteGroup);
 // groupRouter.post("/groups/:groupId/members/:userId", addUserToGroup);
 // groupRouter.delete("/groups/:groupId/members/:userId", removeUserFromGroup);
-// >>>>>>> dev
 groupRouter.get("/groups/:groupId", userAuthorisation, getGroupDetails);
 groupRouter.post("/groups", userAuthorisation, createGroup);
 groupRouter.put("/groups/:groupId",userAuthorisation, groupCrudAuthorisation, updateGroup); // route controller to follow
