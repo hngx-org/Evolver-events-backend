@@ -8,7 +8,11 @@ passport.use(
     {
       clientID: process.env.CLIENTID, // Your Credentials here.
       clientSecret: process.env.CLIENTSECRET, // Your Credentials here.
-      callbackURL: process.env.URLGOOGLE,
+      // if environment is development, use process.env.URLGOOGLEDEV else use process.env.URLGOOGLE
+      callbackURL:
+        process.env.NODE_ENV === "development"
+          ? process.env.URLGOOGLEDEV
+          : process.env.URLGOOGLE,
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
