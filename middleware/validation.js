@@ -1,4 +1,4 @@
-import { check } from "express-validator";
+import { check, validationResult } from "express-validator";
 
 const validate = {
   Event: [
@@ -46,7 +46,16 @@ const validate = {
       .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/)
       .notEmpty()
       .trim(),
+
+
+ 
   ],
+  validateresult = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
 };
 
 export default validate;
