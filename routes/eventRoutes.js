@@ -24,6 +24,10 @@ eventRouter.get("/events/:id", userAuthorisation, getEventDetails);
 eventRouter.delete("/events/:id", userAuthorisation, deleteEvent);
 eventRouter.get("/events/:eventId/comments", userAuthorisation, listComments);
 
-eventRouter.post("/events/:eventId", userAuthorisation, AddCommentToEvent);
+eventRouter.post(
+  "/events/:eventId/comment/:userId",
+  userAuthorisation,
+  AddCommentToEvent,
+);
 
 export default eventRouter;
