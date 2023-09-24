@@ -7,8 +7,6 @@ const commentRouter = express.Router();
 
 commentRouter.get("/events/:eventId/comments", userAuthorisation, listComments);
 
-/*  AddCommentToEvent endpoint previouly  at the EventRoutes is Here now*/
-
 commentRouter.post("/events/:eventId/comment/:userId", userAuthorisation, AddCommentToEvent);
 
 

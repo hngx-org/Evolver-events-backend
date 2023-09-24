@@ -21,10 +21,4 @@ eventRouter.get("/events/:id", userAuthorisation, getEventDetails);
 eventRouter.delete("/events/:id", userAuthorisation, deleteEvent);
 
 
-/*
-AddcommentToEvent Routes has moved  to the commentRoutes
- endpoint also changed to( "/events/:eventId/comment/:userId",userAuthorisation, AddCommentToEvent)
- */
-
-
 export default eventRouter;
