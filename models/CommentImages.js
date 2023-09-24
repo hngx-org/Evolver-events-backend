@@ -28,10 +28,10 @@ const CommentImages = db.define(
   { timestamps: false, underscored: true },
 );
 
-CommentImages.belongsTo(Comment, {foreignKey: "comment_id"})
-CommentImages.belongsTo(Image, {foreignKey: "image_id"})
+CommentImages.belongsTo(Comment, { foreignKey: "comment_id" });
+CommentImages.belongsTo(Image, { foreignKey: "image_id" });
 
-Comment.hasMany(CommentImages, {foreignKey: "comment_id"})
-Image.hasMany(CommentImages, {foreignKey: "image_id"})
+Comment.hasMany(CommentImages, { foreignKey: "comment_id" });
+Image.hasMany(CommentImages, { foreignKey: "image_id" });
 
 export default CommentImages;
