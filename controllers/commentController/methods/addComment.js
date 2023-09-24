@@ -13,7 +13,7 @@ export const AddCommentToEvent = async (req, res, next) => {
         const event = await Event.findByPk(EventId)
         const user = await User.findByPk(UserId)
 
-        if (!event && !user) {
+        if (!event || !user) {
             return res.status(404).json({
                 status: " failed",
                 message: "  Event or  User does not Exit:"
