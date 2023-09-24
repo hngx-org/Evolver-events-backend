@@ -1,4 +1,4 @@
-import GroupMembership from "../../../models/GroupMembership";
+import GroupMembership from "../../../models/GroupMembership.js";
 
 export default async function getUserGroups(req, res) {
   const { userId } = req.params;
