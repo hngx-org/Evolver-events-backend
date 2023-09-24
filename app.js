@@ -8,6 +8,8 @@ import passport from "passport";
 import cookieSession from "cookie-session";
 import authRouter from "./routes/authRoute.js";
 
+import swaggerDocs from "./utils/helpers/swagger.js";
+
 dotenv.config();
 
 // Create Express app
@@ -47,4 +49,6 @@ db.authenticate()
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}.`);
+
+  swaggerDocs(app, port);
 });
