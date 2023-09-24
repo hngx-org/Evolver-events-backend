@@ -1,4 +1,4 @@
-import Group from "../../../models/Group";
+import Group from "../../../models/Group.js";
 
 export default async function getAllGroups(req, res) {
   try {
