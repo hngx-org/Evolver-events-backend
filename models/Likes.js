@@ -1,16 +1,17 @@
 import { DataTypes } from "sequelize";
+
 import User from "./User.js";
-import Group from "./Group.js";
+import Comment from "./Comment.js";
 
 import db from "../config/db.js";
 
-const GroupMembership = db.define(
-  "GroupMembership",
+const Likes = db.define(
+  "likes",
   {
-    group_id: {
+    comment_id: {
       type: DataTypes.UUID,
       references: {
-        model: Group,
+        model: Comment,
         key: "id",
       },
     },
@@ -23,12 +24,13 @@ const GroupMembership = db.define(
     },
   },
   {
-    tableName: "user_groups",
+    tableName: "likes",
+    underscored: true,
     timestamps: false,
   },
 );
 
-User.belongsToMany(Group, { through: GroupMembership, foreignKey: "user_id" });
-Group.belongsToMany(User, { through: GroupMembership, foreignKey: "group_id" });
+User.belongsToMany(Comment, { through: Likes, foreignKey: "user_id" });
+Comment.belongsToMany(User, { through: Likes, foreignKey: "comment_id" });
 
-export default GroupMembership;
+export default Likes;
